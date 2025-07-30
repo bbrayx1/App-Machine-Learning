@@ -8,9 +8,14 @@ import plotly.express as px
 st.set_page_config(page_title="Heart Dashboard", layout="wide")
 
 # --- CARGA DEL MODELO ---
-model_bundle = joblib.load("models/meta_model.pkl")
-model = model_bundle["model"]
-feature_names = model_bundle["features"]
+# --- CARGA DEL MODELO ---
+try:
+    model_bundle = joblib.load("models/meta_model.pkl")
+    model = model_bundle["model"]
+    feature_names = model_bundle["features"]
+except Exception as e:
+    st.error(f"❌ Error cargando el modelo: {e}")
+    st.stop()
 
 # --- ESTILOS PERSONALIZADOS ---
 st.markdown("""
